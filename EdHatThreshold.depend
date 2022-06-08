@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1654591090 source:c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edutilities.c
+	"EdStructures.h"
+	"EdUtilities.h"
+
+1654591090 c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edstructures.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1654591090 c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edutilities.h
+
+1654597160 source:c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edlibhatthreshold.c
+	"EdStructures.h"
+	"EdUtilities.h"
+

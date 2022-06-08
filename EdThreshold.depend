@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1654595919 source:c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edlibthreshold.c
+	"EdStructures.h"
+	"EdUtilities.h"
+
+1654591090 c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edstructures.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1654591090 c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edutilities.h
+
+1654591090 source:c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edutilities.c
+	"EdStructures.h"
+	"EdUtilities.h"
+
+1654595851 source:c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edthreshold.c
+	"EdStructures.h"
+	"EdUtilities.h"
+	"EdLibThreshold.h"
+
+1654593682 c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edlibthreshold.h
+
