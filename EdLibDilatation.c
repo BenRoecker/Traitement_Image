@@ -35,7 +35,7 @@
 #include "EdStructures.h"
 #include "EdUtilities.h"
 
-int Erosion(EdIMAGE *image, EdIMAGE *imres)
+int Dilatation(EdIMAGE *image, EdIMAGE *imres)
 {
   EdPOINT	*point = NULL, *pointv=NULL; /* current and neighbour (voisin in French) points */
   int	i,j;                             /* index of lines and columns of the 3X3 neighbourhood */
@@ -82,7 +82,7 @@ int Erosion(EdIMAGE *image, EdIMAGE *imres)
            POINT_X(point)++)
   {
     flagEros = 0; // Recopie
-    if(PIXEL(image, point) == 255)	/* forme  */
+    if(PIXEL(image, point) == 0)	/*fond  */
     {
         /* ---  Video Scan of the 3x3 neighbourhood --- */
         for(j = 0; j < 3; j++)
@@ -92,14 +92,14 @@ int Erosion(EdIMAGE *image, EdIMAGE *imres)
             POINT_X(pointv) = POINT_X(point) + i - 1;
             POINT_Y(pointv) = POINT_Y(point) + j - 1;
 
-            if(PIXEL(image, pointv) == 0){
+            if(PIXEL(image, pointv) == 255){
                 flagEros = 1; // point dilaté
             }
         }
     }
         /* Traitement : recopie / erosion*/
         if(flagEros == 1){
-            PIXEL(imres, point)= 0;
+            PIXEL(imres, point)= 255;
         }else{
             PIXEL(imres, point)= PIXEL(image, point);
         }
