@@ -5,7 +5,7 @@
  * @brief Data Structures : EdIMAGE, EdPOINT and Macro Definition
  * to access to the data
  *
- * 
+ *
  * @author Patrick Bonnin
  * @email  patrick.bonnin@gmail.com
  * @date 2012.11.01 : creation.
@@ -24,8 +24,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULIAR PURPOSE.
  * See the GNU Lesser General Public License for more details.
  *
- * You  should  have received a copy of the GNU Lesser General Public 
- * License  along  with  this  library;  if  not,  write  to the Free 
+ * You  should  have received a copy of the GNU Lesser General Public
+ * License  along  with  this  library;  if  not,  write  to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 // ------------------------------------------------------------------
@@ -38,6 +38,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdbool.h>
 #define WINDOWS 1
 
 // Some Usefull constants and macros
@@ -46,27 +47,27 @@
 #define PI 3.14159
 
 #define	ABS(X) (((X) > 0) ? (X) : -(X)
-#define SIGN(X) (((X) > 0) ? 1 : (((X) < 0) ? -1 : 0 )) 
+#define SIGN(X) (((X) > 0) ? 1 : (((X) < 0) ? -1 : 0 ))
 #define MIN(X,Y) (((X) > (Y)) ? (Y) : (X))
 #define MAX(X,Y) (((X) > (Y)) ? (X) : (Y))
-		
+
 #define MALLOC(XX) malloc(XX)
 #define FREE(XX) free(XX)
 
-/* -------------------------------------------------------------------- */		
-/* --- Data Structures --- */	       
+/* -------------------------------------------------------------------- */
+/* --- Data Structures --- */
 /* --- EdIMAGE : union of pointers PDATA --- */
 union pdata
 {
   unsigned char   *poctet; /* N&B, RVB or YUV Color Image */
   int             *petiq;  /* label or difference Image */
   float 	      *preel;  /* Real Image */
-};		
+};
 typedef union pdata PDATA;
 
 /* ---	EdIMAGE Structure 		--- */
-struct image 	
-{	
+struct image
+{
   int         nlig; 	/* number of lines */
   int         ncol; 	/* number of columns */
   unsigned char prof; 	/* depth : 1 N&B, 3 RVB, but type : YUV : 5 */
@@ -87,7 +88,7 @@ struct point
 typedef struct point EdPOINT;
 
 /* --------------------------------------------------------------*/
-/*    MACROS : Acces to the data, and Memory Allocation          */ 
+/*    MACROS : Acces to the data, and Memory Allocation          */
 /* --------------------------------------------------------------*/
 /* --- EdIMAGE   --- */
 /* --- Acces to the Data --- */
@@ -110,20 +111,20 @@ typedef struct point EdPOINT;
 
 /* --- Memory Allocation --- */
 #define crea_POINT(XX) ((XX) = (EdPOINT *)MALLOC(sizeof(EdPOINT)))
-		
+
 /* --- Acces to PIXELS --- */
 /* --- B&W Image --- */
 #define PIXEL(XX,YY) (*(((XX)->ptdata.poctet)+(long)((YY)->x)+(long)((XX)->ncol)*(long)((YY)->y)))
 
 /* --- R,G,B Color Image  --- */
 /* Red Component */
-#define PIXEL_R(XX,YY) (*(((XX)->ptdata.poctet)+3*((long)((YY)->x)+(long)((XX)->ncol)*(long)((YY)->y)))) 
+#define PIXEL_R(XX,YY) (*(((XX)->ptdata.poctet)+3*((long)((YY)->x)+(long)((XX)->ncol)*(long)((YY)->y))))
 
 /* Green Component : Green is Vert in French !! */
 #define PIXEL_V(XX,YY) (*(((XX)->ptdata.poctet)+3*((long)((YY)->x)+(long)((XX)->ncol)*(long)((YY)->y)) + 1))
 
 /* Bleue Component */
-#define PIXEL_B(XX,YY) (*(((XX)->ptdata.poctet)+3*((long)((YY)->x)+(long)((XX)->ncol)*(long)((YY)->y)) + 2)) 
+#define PIXEL_B(XX,YY) (*(((XX)->ptdata.poctet)+3*((long)((YY)->x)+(long)((XX)->ncol)*(long)((YY)->y)) + 2))
 
 /* --- Label Image --- */
 #define LABEL(XX,YY) (*(((XX)->ptdata.petiq)+(long)((YY)->x)+(long)((XX)->ncol)*(long)((YY)->y)))

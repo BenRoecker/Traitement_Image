@@ -35,14 +35,11 @@
 #include "EdStructures.h"
 #include "EdUtilities.h"
 
-int MedianFiltering(EdIMAGE *image, EdIMAGE *imres)
+int Erosion(EdIMAGE *image, EdIMAGE *imres)
 {
   EdPOINT	*point = NULL, *pointv=NULL; /* current and neighbour (voisin in French) points */
-  int	i,j,l;                             /* index of lines and columns of the 3X3 neighbourhood */
-  int	k;                                 /* k variable */
-  unsigned char tmp;
-  unsigned char tab[9];
-  bool flagcont;
+  int	i,j;                             /* index of lines and columns of the 3X3 neighbourhood */
+  int	mean;                             /* mean variable */
 
   if(crea_POINT(point) == NULL)          /* Memory Allocation of point */
   {
@@ -84,7 +81,7 @@ int MedianFiltering(EdIMAGE *image, EdIMAGE *imres)
   for(POINT_X(point) = 1; POINT_X(point) < NCOL(image) - 1;
            POINT_X(point)++)
   {
-    k = 0;	/* initialisation  */
+    mean = 0;	/* initialisation  */
 
 /* ---  Video Scan of the 3x3 neighbourhood --- */
     for(j = 0; j < 3; j++)
@@ -94,23 +91,11 @@ int MedianFiltering(EdIMAGE *image, EdIMAGE *imres)
       POINT_X(pointv) = POINT_X(point) + i - 1;
       POINT_Y(pointv) = POINT_Y(point) + j - 1;
 
-      tab[k++] = (PIXEL(image, point));
+      mean += (int)PIXEL(image, pointv);
     } /* --- End of the Neighbourhood Video Scan --- */
-    do{
-        flagcont = FALSE;
-        for(l = 0; l < 8; l++){
-            if(tab[l] > tab[l+1]){
-                tmp = tab[l];
-                tab[l] = tab[l+1];
-                tab[l+1] = tmp;
-                flagcont = TRUE;
-            }
-        }
-    }while(flagcont == TRUE);
+    mean /= 9;/* Normalisation : At the end ! */
 
-
-    PIXEL(imres, point) = tab[4];
-
+    PIXEL(imres, point) = (unsigned char)mean;
   }/* --- End of the Image Video Scan --- */
   /* --- Memory Free  --- */
   free((void *)pointv);
