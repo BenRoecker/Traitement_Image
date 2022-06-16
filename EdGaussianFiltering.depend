@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1655294493 source:c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edgaussfiltering.c
+	"EdStructures.h"
+	"EdUtilities.h"
+	"EdLibGaussFiltering.h"
+
+1654678131 c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edstructures.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<stdbool.h>
+
+1654591090 c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edutilities.h
+
+1655297421 c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edlibgaussfiltering.h
+
+1655297325 source:c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edlibgaussfiltering.c
+	"EdStructures.h"
+	"EdUtilities.h"
+
+1654591090 source:c:\users\benja.laptop-7evs4kbf\desktop\edenvitilin\bin\edutilities.c
+	"EdStructures.h"
+	"EdUtilities.h"
+

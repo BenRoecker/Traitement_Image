@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="EdDilatation" />
+		<Option title="EdGaussianFiltering" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/EdDilatation" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/EdGaussianFiltering" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/EdDilatation" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/EdGaussianFiltering" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -31,18 +31,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="EdDilatation.c">
+		<Unit filename="EdGaussFiltering.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="EdLibDilatation.c">
+		<Unit filename="EdLibGaussFiltering.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="EdLibDilatation.h" />
-		<Unit filename="EdStructures.h" />
 		<Unit filename="EdUtilities.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="EdUtilities.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

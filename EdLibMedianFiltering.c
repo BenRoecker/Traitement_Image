@@ -38,11 +38,11 @@
 int MedianFiltering(EdIMAGE *image, EdIMAGE *imres)
 {
   EdPOINT	*point = NULL, *pointv=NULL; /* current and neighbour (voisin in French) points */
-  int	i,j,l;                             /* index of lines and columns of the 3X3 neighbourhood */
+  int	i,j;                             /* index of lines and columns of the 3X3 neighbourhood */
   int	k;                                 /* k variable */
   unsigned char tmp;
-  unsigned char tab[9];
-  bool flagcont;
+  unsigned char Tab[9];
+  int flagCont;
 
   if(crea_POINT(point) == NULL)          /* Memory Allocation of point */
   {
@@ -94,22 +94,25 @@ int MedianFiltering(EdIMAGE *image, EdIMAGE *imres)
       POINT_X(pointv) = POINT_X(point) + i - 1;
       POINT_Y(pointv) = POINT_Y(point) + j - 1;
 
-      tab[k++] = (PIXEL(image, point));
+      Tab[k++] = (PIXEL(image, pointv));
     } /* --- End of the Neighbourhood Video Scan --- */
-    do{
-        flagcont = FALSE;
-        for(l = 0; l < 8; l++){
-            if(tab[l] > tab[l+1]){
-                tmp = tab[l];
-                tab[l] = tab[l+1];
-                tab[l+1] = tmp;
-                flagcont = TRUE;
-            }
+    do
+    {
+        flagCont = 0;
+
+    /* --- Bubble sort ---*/
+    for(k = 0; k < 8; k++)
+    {
+        if(Tab[k] > Tab[k+1]){
+            flagCont = 1;
+            tmp = Tab[k];
+            Tab[k] = Tab[k+1];
+            Tab[k+1] = tmp;
         }
-    }while(flagcont == TRUE);
+    }
+    }while(flagCont == 1);
+    PIXEL(imres, point) = (unsigned char)Tab[4];
 
-
-    PIXEL(imres, point) = tab[4];
 
   }/* --- End of the Image Video Scan --- */
   /* --- Memory Free  --- */

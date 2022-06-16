@@ -35,7 +35,6 @@
 #include "EdStructures.h"
 #include "EdUtilities.h"
 #include "EdLibErosion.h"
-#include "EdLibDilatation.h"
 
 int main(int argc, char **argv)
 {
@@ -121,14 +120,14 @@ int main(int argc, char **argv)
   }
 
 /* --- Smoothing by Mean Filtering --- */
-  ret = Erosion (image, imres);
+  ret = Dilatation (image, imres);
   if (ret)
   {
     fprintf(stderr,"Problem of Memory Allocation in Mean Filtering \n");
     system ("PAUSE"); // Windows Only
     exit(0);
   }
-  ret = Dilatation (imres, image);
+  ret = Erosion (imres, image);
   if (ret)
   {
     fprintf(stderr,"Problem of Memory Allocation in Mean Filtering \n");

@@ -35,7 +35,6 @@
 #include "EdStructures.h"
 #include "EdUtilities.h"
 #include "EdLibErosion.h"
-#include "EdLibDilatation.h"
 
 int main(int argc, char **argv)
 {
@@ -128,17 +127,10 @@ int main(int argc, char **argv)
     system ("PAUSE"); // Windows Only
     exit(0);
   }
-  ret = Dilatation (imres, image);
-  if (ret)
-  {
-    fprintf(stderr,"Problem of Memory Allocation in Mean Filtering \n");
-    system ("PAUSE"); // Windows Only
-    exit(0);
-  }
 
 /* --- Writing of the Image Result in File --- */
   fprintf(fichres,"P5\n#creating by EdEnviTI\n%d %d\n255\n",(int)ncol, (int)nlig); // Header
-  ret = Writing_ImageData(fichres, image); // Image Pixel Data
+  ret = Writing_ImageData(fichres, imres); // Image Pixel Data
   if (!ret)
   {
     fprintf(stderr,"Problem of Writing \n");

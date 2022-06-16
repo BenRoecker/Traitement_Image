@@ -4,7 +4,7 @@
  *
  * @brief Smooth Filtering using Mean Filter
  * This file is the part "Operator" itself
- * 
+ *
  * @author Patrick Bonnin
  * @email  patrick.bonnin@gmail.com
  * @date 2012.11.01 : creation.
@@ -23,8 +23,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULIAR PURPOSE.
  * See the GNU Lesser General Public License for more details.
  *
- * You  should  have received a copy of the GNU Lesser General Public 
- * License  along  with  this  library;  if  not,  write  to the Free 
+ * You  should  have received a copy of the GNU Lesser General Public
+ * License  along  with  this  library;  if  not,  write  to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 // ------------------------------------------------------------------
@@ -35,7 +35,7 @@
 #include "EdStructures.h"
 #include "EdUtilities.h"
 
-int MeanFiltering(EdIMAGE *image, EdIMAGE *imres)
+int GaussFiltering(EdIMAGE *image, EdIMAGE *imres)
 {
   EdPOINT	*point = NULL, *pointv=NULL; /* current and neighbour (voisin in French) points */
   int	i,j;                             /* index of lines and columns of the 3X3 neighbourhood */
@@ -45,16 +45,16 @@ int MeanFiltering(EdIMAGE *image, EdIMAGE *imres)
   {
      fprintf(stderr,"Error of Memory Allocation \n");
      system("PAUSE"); // Windows Only
-     return 1; 
+     return 1;
   }
-  if(crea_POINT(pointv) == NULL) 
+  if(crea_POINT(pointv) == NULL)
   {
      fprintf(stderr,"Error of Memory Allocation \n");
      system("PAUSE"); // Windows Only
      return 1;
-  } 
+  }
   /* --- Initialisation of Image Borders : Copy of the Original Image  --- */
-  for(POINT_X(point) = 0; POINT_X(point) < NCOL(image); 
+  for(POINT_X(point) = 0; POINT_X(point) < NCOL(image);
            POINT_X(point)++)
   {
     POINT_Y(point) = 0;                  /* first line */
@@ -62,9 +62,9 @@ int MeanFiltering(EdIMAGE *image, EdIMAGE *imres)
 
     POINT_Y(point) = NLIG(image) - 1;    /* last line */
     PIXEL(imres, point) = PIXEL(image, point);
-  } /*--- End of copy of first and last lines --- */ 
+  } /*--- End of copy of first and last lines --- */
 
-  for(POINT_Y(point) = 0; POINT_Y(point) < NLIG(image); 
+  for(POINT_Y(point) = 0; POINT_Y(point) < NLIG(image);
            POINT_Y(point)++)
   {
     POINT_X(point) = 0;                  /* first column */
@@ -72,13 +72,13 @@ int MeanFiltering(EdIMAGE *image, EdIMAGE *imres)
 
     POINT_X(point) = NCOL(image) - 1;    /* last column */
     PIXEL(imres, point) = PIXEL(image, point);
-  } /*--- End of copy of first and last columns --- */ 
+  } /*--- End of copy of first and last columns --- */
 
   /* --- Video Scan of the image, except the Border :
-         Smooting by Mean Filtering  --- */	
-  for(POINT_Y(point) = 1; POINT_Y(point) < NLIG(image) - 1; 
+         Smooting by Mean Filtering  --- */
+  for(POINT_Y(point) = 1; POINT_Y(point) < NLIG(image) - 1;
            POINT_Y(point)++)
-  for(POINT_X(point) = 1; POINT_X(point) < NCOL(image) - 1; 
+  for(POINT_X(point) = 1; POINT_X(point) < NCOL(image) - 1;
            POINT_X(point)++)
   {
     mean = 0;	/* initialisation  */
@@ -89,11 +89,12 @@ int MeanFiltering(EdIMAGE *image, EdIMAGE *imres)
     {
       /* Computation of the Image Coordinates of the Neighbour point */
       POINT_X(pointv) = POINT_X(point) + i - 1;
-      POINT_Y(pointv) = POINT_Y(point) + j - 1;			
+      POINT_Y(pointv) = POINT_Y(point) + j - 1;
 
-      mean += (int)PIXEL(image, pointv); 
+      mean += (int)PIXEL(image, pointv);
     } /* --- End of the Neighbourhood Video Scan --- */
-    mean /= 9;/* Normalisation : At the end ! */
+    mean += (int)PIXEL(image, point);
+    mean /= 10;/* Normalisation : At the end ! */
 
     PIXEL(imres, point) = (unsigned char)mean;
   }/* --- End of the Image Video Scan --- */
@@ -101,4 +102,4 @@ int MeanFiltering(EdIMAGE *image, EdIMAGE *imres)
   free((void *)pointv);
   free((void *)point);
   return 0;
-} /* --- End of the Operator --- */   
+} /* --- End of the Operator --- */

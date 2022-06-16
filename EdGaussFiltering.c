@@ -120,7 +120,7 @@ int main(int argc, char **argv)
   }
 
 /* --- Smoothing by Gauss Filtering --- */
-  ret = GaussFiltering (image, imres);
+  ret = GaussFiltering(image, imres);
   if (ret)
   {
     fprintf(stderr,"Problem of Memory Allocation in Mean Filtering \n");
